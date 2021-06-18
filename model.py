@@ -57,6 +57,9 @@ class Entry(db.Model):
     entry_media = db.relationship('Media')
     user = db.relationship('User')
 
+    def __repr__(self):
+         return f'<Entry entry_id={self.entry_id} entry_text={self.entry_text} date_created={self.date_created} weather={self.weather}>'
+
 
 
 class Media(db.Model):
@@ -86,6 +89,9 @@ class Media(db.Model):
                         nullable=False,)
 
     media_entry = db.relationship('Entry')
+
+    def __repr__(self):
+         return f'<Media media_id={self.media_id} title={self.title} description={self.description} image_url={self.image_url}>'
     
 
 
