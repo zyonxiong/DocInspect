@@ -8,15 +8,37 @@ def create_user(username, password):
     user = User(username=username, password=password)
     db.session.add(user)
     db.session.commit()
+
     return user
 
-def create_new_entry():
+def create_new_entry(entry_text, date_created, weather, 
+                    lat, long):
 
-    db.session
-    db.session
+    entry = Entry(
+        entry_text=entry_text,
+        date_created=date_created,
+        weather=weather,
+        lat=lat,
+        long=long
+    )
+    db.session.add(entry)
+    db.session.commit()
+
+    return entry
     
 
-def create_new_media():
+def create_new_media(title, description, image_url):
+
+    media = Media(
+        title=title,
+        description=description,
+        image_url=image_url
+    )
+
+    db.session.add(Media)
+    db.session.commit()
+
+
 
 
 if __name__ == '__main__':
