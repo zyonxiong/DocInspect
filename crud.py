@@ -1,20 +1,25 @@
 """CRUD Operations"""
 
 from model import db, User, Entry, Media, connect_to_db
+from datetime import datetime
 
 def create_user(username, password):
     """Create and return a new user."""
 
-    user = User(username=username, password=password)
+    user = User(
+        username=username,
+        password=password)
+        
     db.session.add(user)
     db.session.commit()
 
     return user
 
-def create_new_entry(entry_text, date_created, weather, 
+def create_new_entry(user_id, entry_text, date_created, weather, 
                     lat, long):
 
     entry = Entry(
+        user_id=user_id,
         entry_text=entry_text,
         date_created=date_created,
         weather=weather,
