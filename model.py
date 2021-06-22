@@ -42,17 +42,21 @@ class Entry(db.Model):
     entry_text = db.Column(db.String,
                         nullable=True)
 
-    date_created = db.Column(db.DateTime)
+    date_created = db.Column(db.DateTime,
+                    nullable=True)
 
-    weather = db.Column(db.String(50))
+    weather = db.Column(db.String(50),
+                        nullable=True)
 
     # These are from API? -> How to do this for weather
     # look at polar bear video for pin point + note (nice to have)
     # entry browser's location -> default
 
-    lat = db.Column(db.String(50))
+    lat = db.Column(db.String(50),
+                    nullable=True)
 
-    long = db.Column(db.String(50))
+    long = db.Column(db.String(50),
+                    nullable=True)
 
     entry_media = db.relationship('Media')
     user = db.relationship('User')
