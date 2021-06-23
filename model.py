@@ -52,10 +52,10 @@ class Entry(db.Model):
     # look at polar bear video for pin point + note (nice to have)
     # entry browser's location -> default
 
-    lat = db.Column(db.String(50),
+    latitude = db.Column(db.String(50),
                     nullable=True)
 
-    long = db.Column(db.String(50),
+    longitude = db.Column(db.String(50),
                     nullable=True)
 
     entry_media = db.relationship('Media')

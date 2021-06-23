@@ -17,15 +17,15 @@ def create_user(username, password):
 
 
 def create_new_entry(user_id, entry_text, date_created, weather, 
-                    lat, long):
+                    latitude, longitude):
 
     entry = Entry(
         user_id=user_id,
         entry_text=entry_text,
         date_created=date_created,
         weather=weather,
-        lat=lat,
-        long=long
+        latitude=latitude,
+        longitutde=longitude
     )
     db.session.add(entry)
     db.session.commit()
