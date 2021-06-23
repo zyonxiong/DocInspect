@@ -1,5 +1,6 @@
 
 from flask import (Flask, render_template, request, flash, session, redirect)
+import crud
 
 #to throw errors for jinja2 so we will see it instead of error being silent
 from jinja2 import StrictUndefined
@@ -9,17 +10,17 @@ app = Flask(__name__)
 @app.route('/')
 def homepage():
 
-    # """Displays the app's homepage."""
+    """Displays the app's homepage."""
     
-    # email = request.form.get("email")
-    # password = request.form.get("password")
+    username = request.form.get("username")
+    password = request.form.get("password")
 
-    # user = crud.get_user_by_email(email)
-    # if user:
-    #     flash("Cannot create an account with that email. Try again.")
-    # else:
-    #     crud.create_user(email, password)
-    #     flash("Account created! Please log in.")
+    user = crud.get_user_by_username(username)
+    if user:
+         flash("Cannot create an account with that email. Try again.")
+    else:
+        crud.create_user(username, password)
+        flash("Account created! Please log in.")
 
     # return redirect("/")
 
@@ -37,6 +38,8 @@ def create():
 def profile():
 
     """Displays main entry page."""
+    # this needs to be async because the page will update the entries on showing
+    # and clearing forms, but does not do anything else
 
     return render_template('User Homepage.html')
 
