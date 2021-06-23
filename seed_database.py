@@ -17,13 +17,14 @@ import crud
 import model
 import server
 
-os.system('dropdb docinspect')
-os.system('createdb docinspect')
+os.system('dropdb docentries')
+os.system('createdb docentries')
 
 model.connect_to_db(server.app)
 model.db.create_all()
 
 # loads data from API (JSON) and saves it to a variable
+# these JSON string is coming from google, weather and cloudinary
 
 # we only use CRUD to help create a loop to get the entry text here
 # maybe also to create a search here
@@ -31,42 +32,43 @@ model.db.create_all()
 # dynamically meaning that it has to load from front page AND THEN saved
 # to the backend
 
+#can only do this if everything was JSON format, but it's not. The
+#only JSON format is the longitude and latitude, with the weather. So do
+#I need to even set it up like this? I feel that I can just append without
+#using a loop.
+
 entries_in_db = []
-for entry in entry_data:
+# for entry in crud.Entry:
+    #comment out because probably won't need this section down here
     # need entry_data to hold JSON strings (needs to be defined) -> Need to get Front end API data here
     # (can do this because we use JSON to tranlate the data above! JSON -- key: value)
-    entry_text, date_created, weather = (Entry['entry_text'], 
-                                    Entry['date_created'], 
-                                    #this date_created would be automated?
-                                    Entry['weather'])
+    # entry_text, date_created, weather = (Entry['entry_text'], 
+    #                                 Entry['date_created'], 
+    #                                 #this date_created would be automated?
+    #                                 Entry['weather'])
 
-    db_new_entry = crud.create_new_entry(entry_text,
-                                    date_created,
-                                    weather,
-                                    lat,
-                                    long)
-    #print(db_new_movie)
+db_new_entry = crud.create_new_entry(entry_text, date_created, weather, latitude,
+                                    longitude)
     #do we need to use db, explain CRUD
     #CRUD is an idea of abstraction, we put multiple functions within DBs in CRUD so
     #file updates are easier and acessibility is easier
 
-    entries_in_db.append(db_new_entry)
+entries_in_db.append(db_new_entry)
 
 
-medias_in_db = []
-for media in media_data:
-    # need media to hold JSON strings (needs to be defined) -> Need to get Front end API data here
-    # (can do this because we use JSON to tranlate the data above! JSON -- key: value)
-    title, description, image_url = (Media['title'], 
-                                    Media['description'], 
-                                    Media['image_url'])
+# medias_in_db = []
+# for media in media_data:
+#     # need media to hold JSON strings (needs to be defined) -> Need to get Front end API data here
+#     # (can do this because we use JSON to tranlate the data above! JSON -- key: value)
+#     title, description, image_url = (Media['title'], 
+#                                     Media['description'], 
+#                                     Media['image_url'])
 
-    db_new_media_upload = crud.create_new_media(title,
-                                    description,
-                                    image_url)
-    #print(db_new_movie)
-    #do we need to use db, explain CRUD
-    #CRUD is an idea of abstraction, we put multiple functions within DBs in CRUD so
-    #file updates are easier and acessibility is easier
+#     db_new_media_upload = crud.create_new_media(title,
+#                                     description,
+#                                     image_url)
+#     #do we need to use db, explain CRUD
+#     #CRUD is an idea of abstraction, we put multiple functions within DBs in CRUD so
+#     #file updates are easier and acessibility is easier
 
-    medias_in_db.append(db_new_media_upload)
+#     medias_in_db.append(db_new_media_upload)
