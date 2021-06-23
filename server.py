@@ -10,29 +10,51 @@ app = Flask(__name__)
 @app.route('/')
 def homepage():
 
-    """Displays the app's homepage."""
+    """Displays the app's homepage with login."""
+
+    return render_template("Login_Page.html")
+
+
+@app.route('/create-new-account', methods=["POST"])
+def create_user():
+    """Creates a new account, new user."""
     
     username = request.form.get("username")
     password = request.form.get("password")
 
     user = crud.get_user_by_username(username)
     if user:
-         flash("Cannot create an account with that email. Try again.")
+        flash("Username already exist. Please try a new username.")
     else:
         crud.create_user(username, password)
         flash("Account created! Please log in.")
 
-    # return redirect("/")
+    return redirect("/")
 
 
-    return render_template("Login_Page.html")
+@app.route('/login')
+def user_login():
+
+    """Log a user into DocInspect."""
+    
+    username = request.form.get('username')
+    password = request.form.get('password')
+    
+    user = crud.check_user_login_info(username, password)
+    
+    if "user_id" not in session:
+        session["user_id"] = user.user_id
+    else:
+        active_user = session.get("user_id")
+        
+    if user:
+        flash(f"{user.email}, Successful login")
+    else:
+        flash("Login info is incorrect, please try again")    
+
+    return redirect ('/')
 
 
-@app.route('/create-new-account')
-def create():
-    """Creates a new account."""
-
-    return render_template("Create_New_Account.html")
 
 @app.route('/main-page')
 def profile():
