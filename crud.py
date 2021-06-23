@@ -3,6 +3,7 @@
 from model import db, User, Entry, Media, connect_to_db
 from datetime import datetime
 
+
 def create_user(username, password):
     """Create and return a new user."""
 
@@ -15,6 +16,31 @@ def create_user(username, password):
 
     return user
 
+
+
+def get_user_by_username(username):
+    """Return a user by username."""
+
+    return User.query.filter(User.username == username).first()
+
+
+def check_user_login_info(username, password):
+    """Return users email and password match in database"""
+    
+    return User.query.filter((User.username == username) & (User.password == password)).first()
+
+def get_all_usernames():
+    """Return all usernames"""
+
+    return User.query.all()
+
+def get_user_info():
+    """Get the User's detail"""
+
+    return User.query.get(user_id)
+
+#maybe in the future will need some user information and create information here.
+#for now just create and make sure login information works
 
 def create_new_entry(user_id, entry_text, date_created, weather, 
                     latitude, longitude):
@@ -31,15 +57,7 @@ def create_new_entry(user_id, entry_text, date_created, weather,
     db.session.commit()
 
     return entry
-
-
-def check_user_login_info(username, password):
-    """Return users email and password match in database"""
     
-    return User.query.filter((User.username == username) & (User.password == password)).first()
-    
-#maybe in the future will need some user information and create information here.
-#for now just create and make sure login information works
 
 def create_new_media(title, description, image_url):
 
@@ -60,6 +78,7 @@ def get_all_entries():
     """Return all the entries."""
 
     return Entry.query.all()
+
 
 
 
