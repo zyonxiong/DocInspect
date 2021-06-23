@@ -15,14 +15,23 @@ def homepage():
     return render_template("Login_Page.html")
 
 
-@app.route('/create-new-account', methods=["POST"])
-def create_user():
-    """Creates a new account, new user."""
+@app.route('/users')
+def list_of_users():
+    """Gives a list of users."""
     
-    username = request.form.get("username")
-    password = request.form.get("password")
+    user = crud.get_all_usernames()
 
+    return render_template('/all_users.html')
+
+
+@app.route('/users', methods=['POST'])
+def register_user():
+    """Create a new user"""
+    username = request.form.get('username')
+    password = request.form.get('password')
+    
     user = crud.get_user_by_username(username)
+    
     if user:
         flash("Username already exist. Please try a new username.")
     else:
@@ -30,7 +39,6 @@ def create_user():
         flash("Account created! Please log in.")
 
     return redirect("/")
-
 
 @app.route('/login')
 def user_login():

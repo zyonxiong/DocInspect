@@ -34,7 +34,7 @@ def get_all_usernames():
 
     return User.query.all()
 
-def get_user_info():
+def get_user_info(user_id):
     """Get the User's detail"""
 
     return User.query.get(user_id)
