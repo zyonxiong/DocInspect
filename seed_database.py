@@ -7,6 +7,9 @@ import os
 # You’ll need this to load the data from the google & cloudinary API
 import json
 
+from faker import Faker
+# Faker to get fake information
+
 
 # We’ll use datetime.strptime to turn a string into a Python datetime object
 # for time purposes in database
@@ -47,13 +50,51 @@ entries_in_db = []
     #                                 #this date_created would be automated?
     #                                 Entry['weather'])
 
-db_new_entry = crud.create_new_entry(entry_text, date_created, weather, latitude,
-                                    longitude)
-    #do we need to use db, explain CRUD
-    #CRUD is an idea of abstraction, we put multiple functions within DBs in CRUD so
-    #file updates are easier and acessibility is easier
+fake = Faker()
+users = []
 
-entries_in_db.append(db_new_entry)
+for i in range(10):
+    name = fake.user_name()
+    password = fake.password()
+    user = crud.create_user(name, password)
+    users.append(user)
+
+#creating 10 fake users
+
+import random
+
+entries = []
+
+weather_conditions = ['sunny','cloudy', 'rainy']
+
+for i in range(10):
+    entry_text = fake.texts()
+    date_created = fake.date_time()
+    weather = random.choice(weather_conditions)
+    latitude = fake.latitutde()
+    longitude = fake.longitude()
+    entry = crud.create_new_entry(entry_text, date_created, weather, latitude, longitude)
+    entries.append(entry)
+
+        
+#create 10 fake entries
+
+# db_new_entry = crud.create_new_entry(entry_text, date_created, weather, latitude,
+#                                     longitude)
+#     do we need to use db, explain CRUD
+#     CRUD is an idea of abstraction, we put multiple functions within DBs in CRUD so
+#     file updates are easier and acessibility is easier
+
+# entries_in_db.append(db_new_entry)
+
+medias = []
+
+for i in range(10):
+    title = fake.title()
+    description = fake.description()
+    image_url = fake.image_url()
+    media = crud.create_new_media(title, description, image_url)
+    medias.append(media)
 
 
 # medias_in_db = []
