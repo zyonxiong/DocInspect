@@ -1,6 +1,8 @@
 
 from flask import (Flask, render_template, request, flash, session, redirect)
+from model import connect_to_db
 import crud
+import os
 
 #to throw errors for jinja2 so we will see it instead of error being silent
 from jinja2 import StrictUndefined
@@ -21,12 +23,13 @@ def list_of_users():
     
     user = crud.get_all_usernames()
 
-    return render_template('/all_users.html')
+    return render_template('/all_users.html', user=user)
 
 
 @app.route('/users', methods=['POST'])
 def register_user():
     """Create a new user"""
+    
     username = request.form.get('username')
     password = request.form.get('password')
     
@@ -56,7 +59,7 @@ def user_login():
         active_user = session.get("user_id")
         
     if user:
-        flash(f"{user.email}, Successful login")
+        flash(f"{user.username}, Successful login")
     else:
         flash("Login info is incorrect, please try again")    
 
