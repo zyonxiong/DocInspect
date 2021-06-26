@@ -17,12 +17,11 @@ class User(db.Model):
     username = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(50))
 
-    entries = db.relationship('Entry')
+    entries = db.relationship('Entry', back_populates='user')
 
     def __repr__(self):
          return f'<User user_id={self.user_id} username={self.username}>'
 
-    
 
 
 class Entry(db.Model):
@@ -58,8 +57,8 @@ class Entry(db.Model):
     longitude = db.Column(db.String(50),
                     nullable=True)
 
-    entry_media = db.relationship('Media')
-    user = db.relationship('User')
+    medias = db.relationship('Media', back_populates = 'media_entry')
+    user = db.relationship('User', back_populates = 'entries')
 
     def __repr__(self):
          return f'<Entry entry_id={self.entry_id} entry_text={self.entry_text} date_created={self.date_created} weather={self.weather}>'
@@ -92,7 +91,7 @@ class Media(db.Model):
                         db.ForeignKey('entries.entry_id'),
                         nullable=False,)
 
-    media_entry = db.relationship('Entry')
+    media_entry = db.relationship('Entry', back_populates = 'medias')
 
     def __repr__(self):
          return f'<Media media_id={self.media_id} title={self.title} description={self.description} image_url={self.image_url}>'

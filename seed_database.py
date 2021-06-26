@@ -71,9 +71,10 @@ for i in range(10):
     entry_text = fake.texts()
     date_created = fake.date_time()
     weather = random.choice(weather_conditions)
-    latitude = fake.latitutde()
+    latitude = fake.latitude()
     longitude = fake.longitude()
-    entry = crud.create_new_entry(entry_text, date_created, weather, latitude, longitude)
+    user = random.choice(users)
+    entry = crud.create_new_entry(user.user_id, entry_text, date_created, weather, latitude, longitude)
     entries.append(entry)
 
         
@@ -90,10 +91,11 @@ for i in range(10):
 medias = []
 
 for i in range(10):
-    title = fake.title()
-    description = fake.description()
+    title = fake.file_name().split('.')[0]
+    description = fake.sentence()
     image_url = fake.image_url()
-    media = crud.create_new_media(title, description, image_url)
+    entry = random.choice(entries)
+    media = crud.create_new_media(entry, title, description, image_url)
     medias.append(media)
 
 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %} DocInpsect {% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <script src="http://code.jquery.com/jquery.js"></script>
+
+</head>
+<body>
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {{ messages }}
+  {% endif %}
+  {%endwith %}
+
+  {% block body %} {% endblock %}
+
+</body>
+</html>

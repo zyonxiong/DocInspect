@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+      <h1>Welcome To DocInspect</h1>
+      <div>
+      </head>
+        <h1>Don't have an account? Create A New Account Here!</h1>
+          <form action="/users" method="POST">
+          <label>Username: <input type="text" name="username"></label><br>
+          <label>Password: <input type="text" name="password"></label><br>
+          <input type="submit">
+        </form>
+        <h1>Log In</h1>
+          <form action="/login" method="POST">
+              <label>Username:<input type="text" name="username"></label><br>
+              <label>Password:<input type="text" name="password"></label><br>
+              <input type="submit">
+              <br>
+          </form>
+      </div>
+    
+{% endblock %}
+
+

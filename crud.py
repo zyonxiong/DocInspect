@@ -17,7 +17,6 @@ def create_user(username, password):
     return user
 
 
-
 def get_user_by_username(username):
     """Return a user by username."""
 
@@ -25,7 +24,7 @@ def get_user_by_username(username):
 
 
 def check_user_login_info(username, password):
-    """Return users email and password match in database"""
+    """Return username and password match in database"""
     
     return User.query.filter((User.username == username) & (User.password == password)).first()
 
@@ -33,6 +32,7 @@ def get_all_usernames():
     """Return all usernames"""
 
     return User.query.all()
+
 
 def get_user_info(user_id):
     """Get the User's detail"""
@@ -51,7 +51,7 @@ def create_new_entry(user_id, entry_text, date_created, weather,
         date_created=date_created,
         weather=weather,
         latitude=latitude,
-        longitutde=longitude
+        longitude=longitude
     )
     db.session.add(entry)
     db.session.commit()
@@ -59,15 +59,16 @@ def create_new_entry(user_id, entry_text, date_created, weather,
     return entry
     
 
-def create_new_media(title, description, image_url):
+def create_new_media(entry,title, description, image_url):
 
     media = Media(
+        media_entry = entry,
         title=title,
         description=description,
         image_url=image_url
     )
 
-    db.session.add(Media)
+    db.session.add(media)
     db.session.commit()
 
     return media
