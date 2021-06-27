@@ -3,11 +3,14 @@ from flask import (Flask, render_template, request, flash, session, redirect)
 from model import connect_to_db
 import crud
 import os
+import cloudinary.uploader
 
 #to throw errors for jinja2 so we will see it instead of error being silent
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
+app.secret_key = 'secretmessage'
+
 
 @app.route('/')
 def homepage():
@@ -43,7 +46,7 @@ def register_user():
 
     return redirect("/")
 
-@app.route('/login')
+@app.route('/login', methods=['POST'])
 def user_login():
 
     """Log a user into DocInspect."""
@@ -63,7 +66,7 @@ def user_login():
     else:
         flash("Login info is incorrect, please try again")    
 
-    return redirect ('/')
+    return render_template('/User Homepage.html')
 
 
 
@@ -76,7 +79,27 @@ def profile():
 
     return render_template('User Homepage.html')
 
+
+@app.route('/add-entry', methods=["POST"])
+def add_entry():
+
+    entry_text = request.form.get("entry")
+    date_created = request.form.get("date")
+    weather = request.form.get('weather')
+    location = request.form.get('longitude', 'latitude')
+    media = request.files['media']
+    media = cloudinary.uploader.upload(media,
+                                        api_key=CLOUDINARY_KEY,
+                                        api_secret=CLOUDINARY_KEY_SECRET,
+                                        could_name=zxiong)
+
+
+
+
+
+
 if __name__ == '__main__':
+    connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)
 
 #use localhost:5000
