@@ -77,7 +77,7 @@ def profile():
     # this needs to be async because the page will update the entries on showing
     # and clearing forms, but does not do anything else
 
-    return render_template('User Homepage.html')
+    return render_template('User_Homepage.html')
 
 
 @app.route('/add-entry', methods=["POST"])

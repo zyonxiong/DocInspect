@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+
+    <script
+    async defer
+    src="https://www.googleapis.com/geolocation/v1/geolocate?key=YOUR_API_KEY">
+    </script>
+
+    <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript">  
+      </script>
+
+
+    
+    
+  </head>
+    <h1>Welcome User!</h1>
+  <body>
+    <form>
+      <label>Search <input type="text"></label><br>
+      <label>Date <input type="text"></label><br>
+    </form>
+
+    <form action='/add-entry', method="POST">
+      <div>
+        <label>Add an Entry
+          <input type="textarea" name='entry'><br>
+          <input type='text' name = 'date'><br>
+        </label>
+        <label>Current Forecast</label>
+          <input type='text' name='weather'>
+          <input type='text' name='weather'>
+          <input type='submit'><br>
+        <label>Location</label>
+          <input type='text' name='longitutde'>
+          <input type='text' name='latitude'>
+          <input type='submit'><br>
+        <label>IMG/Video Upload</label><br>
+          <input type='text' name='media'>
+        <input type="submit">
+      </div>
+    </form>
+  </body>
+</html>
