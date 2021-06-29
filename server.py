@@ -85,16 +85,29 @@ def add_entry():
 
     entry_text = request.form.get("entry")
     date_created = request.form.get("date")
-    weather = request.form.get('weather')
-    location = request.form.get('longitude', 'latitude')
-    media = request.files['media']
-    media = cloudinary.uploader.upload(media,
-                                        api_key=CLOUDINARY_KEY,
-                                        api_secret=CLOUDINARY_KEY_SECRET,
-                                        could_name=zxiong)
+    # weather = request.form.get('weather')
+    # location = request.form.get('longitude', 'latitude')
+    # media = request.files['media']
+    # media = cloudinary.uploader.upload(media,
+    #                                     api_key=CLOUDINARY_KEY,
+    #                                     api_secret=CLOUDINARY_KEY_SECRET,
+    #                                     could_name=zxiong)
+# weather -> comes from API
+# location -> global object through all browsers -> navigator.geolocation()
+# JSON format string -> convert it to a structure (.JSON)
 
 
+@app.route('/view-entries')
+def view_all_entries():
+    """View a list of all the entries"""
 
+    entries = crud.get_all_entries()
+
+    return render_template('User_Homepage.html', entries=entries )
+
+
+#need another route to display all entries associated with
+#media here
 
 
 
