@@ -57,7 +57,19 @@ def create_new_entry(user_id, entry_text, date_created, weather,
     db.session.commit()
 
     return entry
+
+def get_entry_by_id(entry_id):
+    """Return entry by id"""
+
+    return Entry.query.get(user_id)
     
+
+def get_all_entries():
+
+    """Return all the entries."""
+
+    return Entry.query.all()
+
 
 def create_new_media(entry,title, description, image_url):
 
@@ -72,15 +84,13 @@ def create_new_media(entry,title, description, image_url):
     db.session.commit()
 
     return media
-    
-
-def get_all_entries():
-
-    """Return all the entries."""
-
-    return Entry.query.all()
 
 
+def get_all_medias():
+
+    """Retrun all media"""
+
+    return Media.query.all()
 
 
 
