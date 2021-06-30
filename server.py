@@ -85,25 +85,29 @@ def add_entry():
 
     entry_text = request.form.get("entry")
     date_created = request.form.get("date")
-    # weather = request.form.get('weather')
-    # location = request.form.get('longitude', 'latitude')
-    # media = request.files['media']
-    # media = cloudinary.uploader.upload(media,
-    #                                     api_key=CLOUDINARY_KEY,
-    #                                     api_secret=CLOUDINARY_KEY_SECRET,
-    #                                     could_name=zxiong)
+    weather = request.form.get('weather')
+    location = request.form.get('longitude', 'latitude')
+    media = request.form.get('weather')
+    
 # weather -> comes from API
 # location -> global object through all browsers -> navigator.geolocation()
 # JSON format string -> convert it to a structure (.JSON)
 
-    return render_template('User_Homepage.html')
+    added_entries = crud.create_new_entry()
+
+    return render_template('User_Homepage.html', entry_text=entry_text,
+                                                date_created=date_created,
+                                                weather=weather,
+                                                location=location,
+                                                media=media)
+    #this needs to be render as a new html that will update all entries?
 
 
 @app.route('/view-entries')
 def view_all_entries():
-    """View a list of all the entries"""
+    """View a list of all the entries of a single user."""
 
-    entries = crud.get_all_entries()
+    entries = crud.get_entry_by_id(entry_id)
 
     return render_template('all_entries.html', entries=entries )
 
