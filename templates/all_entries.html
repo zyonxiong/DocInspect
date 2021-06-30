@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}All Entries{% endblock %}
+
+{% block body %}
+
+{% for entry in entries %}
+    <ul>
+        <li>
+            <a href = "/view-entries/{{entry.user_id}}">
+            {{entry.user_id}}
+            {{entry.entry_text}}
+            {{entry.date_created}}
+            </a>
+        </li>
+    </ul>
+{% endfor %}
+
+{% endblock body %}

@@ -66,7 +66,7 @@ def user_login():
     else:
         flash("Login info is incorrect, please try again")    
 
-    return render_template('/User Homepage.html')
+    return render_template('/User_Homepage.html')
 
 
 
@@ -96,6 +96,8 @@ def add_entry():
 # location -> global object through all browsers -> navigator.geolocation()
 # JSON format string -> convert it to a structure (.JSON)
 
+    return render_template('User_Homepage.html')
+
 
 @app.route('/view-entries')
 def view_all_entries():
@@ -103,7 +105,7 @@ def view_all_entries():
 
     entries = crud.get_all_entries()
 
-    return render_template('User_Homepage.html', entries=entries )
+    return render_template('all_entries.html', entries=entries )
 
 
 #need another route to display all entries associated with
