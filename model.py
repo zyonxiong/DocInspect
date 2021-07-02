@@ -61,7 +61,7 @@ class Entry(db.Model):
     user = db.relationship('User', back_populates = 'entries')
 
     def __repr__(self):
-         return f'<Entry entry_id={self.entry_id} entry_text={self.entry_text} date_created={self.date_created} weather={self.weather}>'
+         return f'<Entry entry_id={self.entry_id} entry_text={self.entry_text} date_created={self.date_created} weather={self.weather} latitude={self.latitude} longitude={self.longitude}>'
 
 
 
