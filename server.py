@@ -1,6 +1,6 @@
 
-from flask import (Flask, render_template, request, flash, session, redirect)
-from model import connect_to_db
+from flask import (Flask, url_for, render_template, request, flash, session, redirect)
+from model import Entry, connect_to_db
 import crud
 import os
 import cloudinary.uploader
@@ -69,37 +69,29 @@ def user_login():
     return render_template('/User_Homepage.html')
 
 
-
-@app.route('/main-page')
-def profile():
-
-    """Displays main entry page."""
-    # this needs to be async because the page will update the entries on showing
-    # and clearing forms, but does not do anything else
-
-    return render_template('User_Homepage.html')
-
-
 @app.route('/add-entry', methods=["POST"])
 def add_entry():
 
-    entry_text = request.form.get("entry")
+    user_id = session['user_id']
+    entry_text = request.form.get('entry')
     date_created = request.form.get("date")
     weather = request.form.get('weather')
-    location = request.form.get('longitude', 'latitude')
-    media = request.form.get('weather')
+    longitude = request.form.get('longitude')
+    latitude = request.form.get('latitude')
+
+    x = crud.create_new_entry(user_id, entry_text, date_created, weather,longitude,latitude)
     
 # weather -> comes from API
 # location -> global object through all browsers -> navigator.geolocation()
 # JSON format string -> convert it to a structure (.JSON)
 
-    added_entries = crud.create_new_entry()
-
-    return render_template('User_Homepage.html', entry_text=entry_text,
+#query.all() with filter by user_id -> user_id
+    return render_template('all_entries.html'), entry_text=entry_text,
                                                 date_created=date_created,
                                                 weather=weather,
-                                                location=location,
-                                                media=media)
+                                                longitude = longitude,
+                                                latitude=latitude)
+
     #this needs to be render as a new html that will update all entries?
 
 
@@ -107,10 +99,9 @@ def add_entry():
 def view_all_entries():
     """View a list of all the entries of a single user."""
 
-    entries = crud.get_entry_by_id(entry_id)
+    print("Submitted!")
 
-    return render_template('all_entries.html', entries=entries )
-
+    return render_template('User_Homepage.html')
 
 #need another route to display all entries associated with
 #media here
