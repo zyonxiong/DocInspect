@@ -78,21 +78,23 @@ def add_entry():
     weather = request.form.get('weather')
     longitude = request.form.get('longitude')
     latitude = request.form.get('latitude')
+    media = request.form.get('media')
 
-    x = crud.create_new_entry(user_id, entry_text, date_created, weather,longitude,latitude)
+    # new_entry = crud.create_new_entry(user_id, entry_text,
+    #                                 date_created, weather, 
+    #                                 latitude, longitude)
     
 # weather -> comes from API
 # location -> global object through all browsers -> navigator.geolocation()
 # JSON format string -> convert it to a structure (.JSON)
 
 #query.all() with filter by user_id -> user_id
-    return render_template('all_entries.html'), entry_text=entry_text,
+# Entry.query.filterby(Entry.user_id == session['name'].all()
+    return render_template('all_entries.html', entry_text=entry_text,
                                                 date_created=date_created,
                                                 weather=weather,
-                                                longitude = longitude,
-                                                latitude=latitude)
-
-    #this needs to be render as a new html that will update all entries?
+                                                latitude=latitude,
+                                                longitude = longitude)
 
 
 @app.route('/view-entries')
@@ -105,7 +107,6 @@ def view_all_entries():
 
 #need another route to display all entries associated with
 #media here
-
 
 
 if __name__ == '__main__':
