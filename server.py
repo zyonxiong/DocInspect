@@ -78,7 +78,6 @@ def add_entry():
     weather = request.form.get('weather')
     longitude = request.form.get('longitude')
     latitude = request.form.get('latitude')
-    media = request.form.get('media')
 
     # new_entry = crud.create_new_entry(user_id, entry_text,
     #                                 date_created, weather, 
