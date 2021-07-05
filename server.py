@@ -66,7 +66,7 @@ def user_login():
     else:
         flash("Login info is incorrect, please try again")    
 
-    return render_template('/User_Homepage.html')
+    return render_template('User_Homepage.html')
 
 
 @app.route('/add-entry', methods=["POST"])
@@ -79,32 +79,31 @@ def add_entry():
     longitude = request.form.get('longitude')
     latitude = request.form.get('latitude')
 
-    # new_entry = crud.create_new_entry(user_id, entry_text,
-    #                                 date_created, weather, 
-    #                                 latitude, longitude)
+    new_entry = crud.create_new_entry(user_id, entry_text,
+                                     date_created, weather, 
+                                     latitude, longitude)
     
 # weather -> comes from API
 # location -> global object through all browsers -> navigator.geolocation()
 # JSON format string -> convert it to a structure (.JSON)
 
-#query.all() with filter by user_id -> user_id
-# Entry.query.filterby(Entry.user_id == session['name'].all()
-    return render_template('all_entries.html', entry_text=entry_text,
-                                                date_created=date_created,
-                                                weather=weather,
-                                                latitude=latitude,
-                                                longitude = longitude)
+    return redirect('/view-entries')
 
 
 @app.route('/view-entries')
 def view_all_entries():
     """View a list of all the entries of a single user."""
 
-    print("Submitted!")
+    user_id = session.get('user_id')
 
-    return render_template('User_Homepage.html')
+    if user_id is None:
 
-#need another route to display all entries associated with
+        return redirect('/')
+
+    user_entries = crud.get_all_entries_by_user_id(user_id)
+
+    return render_template('all_entries.html', user_entries=user_entries)
+
 #media here
 
 
