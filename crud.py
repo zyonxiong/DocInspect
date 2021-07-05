@@ -61,8 +61,12 @@ def create_new_entry(user_id, entry_text, date_created, weather,
 def get_entry_by_id(entry_id):
     """Return entry by id"""
 
-    return Entry.query.get(Entry.user_id)
+    return Entry.query.get(entry_id)
     
+def get_all_entries_by_user_id(user_id):
+
+    return Entry.query.filter_by(user_id = user_id).all()
+
 
 def get_all_entries():
 
