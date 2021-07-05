@@ -10,4 +10,22 @@
 <h1> Longitude Point: {{ longitude }} </h1>
 
 
+{% for entry in user_entries %}
+
+    <div>
+
+    {{ entry.date_created }}
+
+    <ul>
+    {{ entry.entry_text }}
+    {{ entry.weather }}
+    {{ entry.latitude }}
+    {{ entry. longitude }}
+    <ul>
+
+    </div>
+
+{% endfor %}
+
+
 {% endblock body %}
