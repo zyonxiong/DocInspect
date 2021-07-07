@@ -2,14 +2,18 @@
 from flask import (Flask, url_for, render_template, request, flash, session, redirect)
 from model import Entry, connect_to_db
 import crud
-import os
+from app_secrets import CLOUDINARY_KEY, CLOUDINARY_SECRET, WEATHER_KEY, GOOGLE_KEY
 import cloudinary.uploader
+import requests
 
 #to throw errors for jinja2 so we will see it instead of error being silent
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
 app.secret_key = 'secretmessage'
+
+
+#refer by variable for key name
 
 
 @app.route('/')
@@ -78,6 +82,10 @@ def add_entry():
     weather = request.form.get('weather')
     longitude = request.form.get('longitude')
     latitude = request.form.get('latitude')
+    
+    # this is to get the weather & longitude and lat points
+    res_cord = request.get('http://api.weatherapi.com/v1/current.json?key=WEATHER_API')
+    coordinates = res_cord.json()
 
     new_entry = crud.create_new_entry(user_id, entry_text,
                                      date_created, weather, 
