@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+<script src="/static/JS/geolocation_api.js"></script>
+<script src="/static/JS/weather_api.js"></script>
+<script src="/static/JS/user_homepage.js"></script>
+
+
 {% block body %}
 
     <h1>Welcome User!</h1>
@@ -17,9 +22,9 @@
         </label>
         <label>Click me for Current Forecast</label>
           <input type='text' name='weather'><br>
-        <label>Click me for current Location</label>
-          <input type='text' name='longitude'>
-          <input type='text' name='latitude'><br>
+          <button id='location'>Location</button>
+          <input type='text' id='longitutde' name='longitude'>
+          <input type='text' id='latitude' name='latitude'><br>
 
           <!-- override default behavior (use -evt-), use javascript to package inputs, 
           each js to gather, process & talk to server (crud) to send out again to db -->

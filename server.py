@@ -1,17 +1,17 @@
 
-from flask import (Flask, url_for, render_template, request, flash, session, redirect)
+from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
 from model import Entry, connect_to_db
 import crud
 from app_secrets import CLOUDINARY_KEY, CLOUDINARY_SECRET, WEATHER_KEY, GOOGLE_KEY
 import cloudinary.uploader
 import requests
+import json
 
 #to throw errors for jinja2 so we will see it instead of error being silent
 from jinja2 import StrictUndefined
 
 app = Flask(__name__)
 app.secret_key = 'secretmessage'
-
 
 #refer by variable for key name
 
@@ -73,30 +73,31 @@ def user_login():
     return render_template('User_Homepage.html')
 
 
-@app.route('/add-entry', methods=["POST"])
+@app.route('/add-entry', methods=["GET","POST"])
 def add_entry():
 
     user_id = session['user_id']
     entry_text = request.form.get('entry')
-    date_created = request.form.get("date")
+    date_created = request.form.get('date')
     weather = request.form.get('weather')
-    longitude = request.form.get('longitude')
-    latitude = request.form.get('latitude')
     
-    # this is to get the weather & longitude and lat points
-    res_cord = request.get('http://api.weatherapi.com/v1/current.json?key=WEATHER_API')
-    coordinates = res_cord.json()
-
-    new_entry = crud.create_new_entry(user_id, entry_text,
-                                     date_created, weather, 
-                                     latitude, longitude)
+    longitude = request.form.get('longitude') #this to grab from API
     
-# weather -> comes from API
-# location -> global object through all browsers -> navigator.geolocation()
-# JSON format string -> convert it to a structure (.JSON)
+    latitude = request.form.get('latitude') #this to grab from API
+    
+    # new_entry = crud.create_new_entry(user_id, entry_text,
+    #                                  date_created, weather, 
+    #                                  latitude, longitude)
 
     return redirect('/view-entries')
+    
 
+@app.route('/coordinate-info.json')
+def get_coordinates():
+
+    longitude = requests.args.get('longitude')
+    latitude = requests.args.get('latitude')
+    return jsonify()
 
 @app.route('/view-entries')
 def view_all_entries():
@@ -111,6 +112,7 @@ def view_all_entries():
     user_entries = crud.get_all_entries_by_user_id(user_id)
 
     return render_template('all_entries.html', user_entries=user_entries)
+
 
 #media here
 
