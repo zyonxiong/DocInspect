@@ -86,8 +86,8 @@ def add_entry():
     latitude = request.form.get('latitude') #this to grab from API
     
     # new_entry = crud.create_new_entry(user_id, entry_text,
-    #                                  date_created, weather, 
-    #                                  latitude, longitude)
+    #                                 date_created, weather, 
+    #                                   latitude, longitude)
 
     return redirect('/view-entries')
     
