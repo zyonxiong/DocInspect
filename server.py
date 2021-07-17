@@ -80,26 +80,29 @@ def add_entry():
     entry_text = request.form.get('entry')
     date_created = request.form.get('date')
     weather = request.form.get('weather')
-    longitude = request.form.get('longitude') #this to grab from API
-    latitude = request.form.get('latitude') #this to grab from API
-
-    url = 'https://api.weatherapi.com/v1/current.json'
-    payload = {'key': WEATHER_KEY,
-    'latitude': latitude,
-    'longitude': longitude,
-    'weather': weather}
-
-    res = requests.get(url, params=payload)
-    #res.json()
-    # if res is correct, then pass
-    # else if res is incorrect, then message should state that 
-    # request cannot be made 
+    longitude = request.form.get('longitude') 
+    latitude = request.form.get('latitude')
     
-    # new_entry = crud.create_new_entry(user_id, entry_text,
-    #                                 date_created, weather, 
-    #                                   latitude, longitude)
+    new_entry = crud.create_new_entry(user_id, entry_text,
+                                   date_created, weather, 
+                                       latitude, longitude)
 
     return redirect('/view-entries')
+
+@app.route('/geoapi/')
+def secure_api_route():
+    
+    latitude = request.args.get('latitude')
+    longitude = request.args.get('longitude')
+
+    # url = f'https://api.weatherapi.com/v1/current.json?key={WEATHER_KEY}&q={latitude},{longitude}'
+    # payload = {'key': WEATHER_KEY,
+    # 'q': latitude, longitude}
+
+    res = requests.get(f'https://api.weatherapi.com/v1/current.json?key={WEATHER_KEY}&q={latitude},{longitude}')
+    data = res.json()
+    
+    return jsonify(data)
 
 @app.route('/view-entries')
 def view_all_entries():

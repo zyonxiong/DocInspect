@@ -1,16 +1,18 @@
 function successFunction(data)
     {
       $('#weather').val(data.current.condition.text)
+      //$('#temperature').val(data.current.temp_f)
+      //$('#date').val(data.location.localtime)
       // console.log(data.current.condition.text);
-      $('#longitutde').val(data.current.'')
-      $('#latitude').val(data.current.'')
+      $('#longitude').val(data.location.lon)
+      $('#latitude').val(data.location.lat)
 
     }
     
     $("#location").on("click", (evt) => {
       evt.preventDefault()
 
-    navigator.geolocation.getCurrentPosition(geolocator,error)
+      navigator.geolocation.getCurrentPosition(geolocator,error)
 
     });
 
@@ -20,7 +22,7 @@ function geolocator(position) {
     const longitude = position.coords.longitude;
 
       $.ajax({
-        url: `https://api.weatherapi.com/v1/current.json?key=WEATHER_KEY&q=${latitude},${longitude}`,
+        url: `/geoapi/?latitude=${latitude}&longitude=${longitude}`,
         contentType: 'json',
         success: successFunction,
         method: "GET"
@@ -31,3 +33,5 @@ function geolocator(position) {
   function error() {
     status.textContent = 'Unable to retrieve your location';
   }
+
+  // don't put api key here, call the route which have the api key
