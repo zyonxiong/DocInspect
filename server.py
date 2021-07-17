@@ -80,24 +80,26 @@ def add_entry():
     entry_text = request.form.get('entry')
     date_created = request.form.get('date')
     weather = request.form.get('weather')
-    
     longitude = request.form.get('longitude') #this to grab from API
-    
     latitude = request.form.get('latitude') #this to grab from API
+
+    url = 'https://api.weatherapi.com/v1/current.json'
+    payload = {'key': WEATHER_KEY,
+    'latitude': latitude,
+    'longitude': longitude,
+    'weather': weather}
+
+    res = requests.get(url, params=payload)
+    #res.json()
+    # if res is correct, then pass
+    # else if res is incorrect, then message should state that 
+    # request cannot be made 
     
     # new_entry = crud.create_new_entry(user_id, entry_text,
     #                                 date_created, weather, 
     #                                   latitude, longitude)
 
     return redirect('/view-entries')
-    
-
-@app.route('/coordinate-info.json')
-def get_coordinates():
-
-    longitude = requests.args.get('longitude')
-    latitude = requests.args.get('latitude')
-    return jsonify()
 
 @app.route('/view-entries')
 def view_all_entries():
