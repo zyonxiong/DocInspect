@@ -33,5 +33,3 @@ function geolocator(position) {
   function error() {
     status.textContent = 'Unable to retrieve your location';
   }
-
-  // don't put api key here, call the route which have the api key

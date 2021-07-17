@@ -15,16 +15,21 @@
         <label>Add an Entry
           <input type="textarea" id= 'entry' name='entry'><br>
         </label>
-        <label>Click me for Current Forecast</label>
-          <input type='text' id='weather' name='weather'><br>
-          <button id='location'>Location</button>
-          <input type='text' id='longitude' name='longitude'>
+        <label>Forecast</label>
+          <input type='text' id='weather' name='weather'>
+          <button id='location'>Location</button><br>
+          <label>Location:</label><input type='text' id='longitude' name='longitude'>
           <input type='text' id='latitude' name='latitude'><br>
         <label>IMG/Video Upload</label><br>
           <input type='text' id='media' name='media'>
-        <input type="submit" id='button'>
       </div>
     </form>
+
+  <form action="/add entry" method="POST" enctype="multipart/form-data">
+      <input type="file" name="my-file">
+      <input type="submit">
+
+  </form>
     
     
 {% endblock %}

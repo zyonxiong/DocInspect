@@ -82,15 +82,17 @@ def add_entry():
     weather = request.form.get('weather')
     longitude = request.form.get('longitude') 
     latitude = request.form.get('latitude')
+    media = request.form.get('media')
     
     new_entry = crud.create_new_entry(user_id, entry_text,
                                    date_created, weather, 
-                                       latitude, longitude)
+                                       latitude, longitude,
+                                       media)
 
     return redirect('/view-entries')
 
 @app.route('/geoapi/')
-def secure_api_route():
+def secure_geo_api_route():
     
     latitude = request.args.get('latitude')
     longitude = request.args.get('longitude')
@@ -103,6 +105,19 @@ def secure_api_route():
     data = res.json()
     
     return jsonify(data)
+
+
+@app.route('/mediasapi', methods=["POST"])
+def secure_media_api_route():
+
+    media_file = request.files['my-file']
+
+    result = cloudinary.uploader.upload(media_file,
+                                        CLOUDINARY_KEY,
+                                        CLOUDINARY_SECRET,
+                                        cloud_name=zxiong)
+
+
 
 @app.route('/view-entries')
 def view_all_entries():
@@ -117,9 +132,6 @@ def view_all_entries():
     user_entries = crud.get_all_entries_by_user_id(user_id)
 
     return render_template('all_entries.html', user_entries=user_entries)
-
-
-#media here
 
 
 if __name__ == '__main__':
