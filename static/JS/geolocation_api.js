@@ -2,6 +2,8 @@ function successFunction(data)
     {
       $('#weather').val(data.current.condition.text)
       // console.log(data.current.condition.text);
+      $('#longitutde').val(data.current.'')
+      $('#latitude').val(data.current.'')
 
     }
     

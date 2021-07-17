@@ -1,10 +1,5 @@
 {% extends 'base.html' %}
 
-<script src="/static/JS/geolocation_api.js"></script>
-<script src="/static/JS/weather_api.js"></script>
-<script src="/static/JS/user_homepage.js"></script>
-
-
 {% block body %}
 
     <h1>Welcome User!</h1>
@@ -16,24 +11,29 @@
 
     <form action='/add-entry', method="POST">
       <div>
-        <label>Date <input type="text" name='date'></label><br>
+        <label>Date <input type="date" id='date' name='date'></label><br>
         <label>Add an Entry
-          <input type="textarea" name='entry'><br>
+          <input type="textarea" id= 'entry' name='entry'><br>
         </label>
         <label>Click me for Current Forecast</label>
-          <input type='text' name='weather'><br>
+          <input type='text' id='weather' name='weather'><br>
           <button id='location'>Location</button>
-          <input type='text' id='longitutde' name='longitude'>
+          <input type='text' id='longitude' name='longitude'>
           <input type='text' id='latitude' name='latitude'><br>
-
-          <!-- override default behavior (use -evt-), use javascript to package inputs, 
-          each js to gather, process & talk to server (crud) to send out again to db -->
-
         <label>IMG/Video Upload</label><br>
-          <input type='text' name='media'>
+          <input type='text' id='media' name='media'>
         <input type="submit" id='button'>
       </div>
     </form>
     
     
-{% endblock body %}
+{% endblock %}
+
+{% block script%}
+
+<script src="/static/JS/geolocation_api.js"></script>
+<script src="/static/JS/weather_api.js"></script>
+<script src="/static/JS/user_homepage.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+{% endblock %}

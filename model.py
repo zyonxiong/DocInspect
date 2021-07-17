@@ -47,10 +47,6 @@ class Entry(db.Model):
     weather = db.Column(db.String(50),
                         nullable=True)
 
-    # These are from API? -> How to do this for weather
-    # look at polar bear video for pin point + note (nice to have)
-    # entry browser's location -> default
-
     latitude = db.Column(db.String(50),
                     nullable=True)
 
