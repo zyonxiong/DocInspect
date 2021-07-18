@@ -82,12 +82,17 @@ def add_entry():
     weather = request.form.get('weather')
     longitude = request.form.get('longitude') 
     latitude = request.form.get('latitude')
-    media = request.form.get('media')
     
     new_entry = crud.create_new_entry(user_id, entry_text,
                                    date_created, weather, 
-                                       latitude, longitude,
-                                       media)
+                                       latitude, longitude)
+
+    title = request.form.get('title')
+    description = request.form.get('description')
+    image_url = request.form.get('image_url')
+    entry_id = new_entry.entry_id
+
+    new_media = crud.create_new_media(title,description,image_url,entry_id)
 
     return redirect('/view-entries')
 
@@ -105,7 +110,7 @@ def secure_geo_api_route():
     data = res.json()
     
     return jsonify(data)
-
+    
 
 @app.route('/mediasapi', methods=["POST"])
 def secure_media_api_route():
@@ -116,7 +121,7 @@ def secure_media_api_route():
                                         CLOUDINARY_KEY,
                                         CLOUDINARY_SECRET,
                                         cloud_name=zxiong)
-
+    img_url = result['secure_url']
 
 
 @app.route('/view-entries')

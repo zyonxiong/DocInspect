@@ -25,11 +25,14 @@
       </div>
     </form>
 
-  <form action="/add entry" method="POST" enctype="multipart/form-data">
-      <input type="file" name="my-file">
-      <input type="submit">
-
+  <form id="media-submittal" action="/add entry" method="POST" enctype="multipart/form-data">
+      <input type="file" name="my-file"><br>
+      <label>Media Title</label><input type='text' id='title'><br>
+      <label>Media Description</label><input type='text' id='description'><br>
+      <label>Media URL</label><input type='image_url' id="image_url"><br>
   </form>
+
+  <input type="submit">
     
     
 {% endblock %}
