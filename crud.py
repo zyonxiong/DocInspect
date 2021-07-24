@@ -75,7 +75,7 @@ def get_all_entries():
     return Entry.query.all()
 
 
-def create_new_media(entry,title, description, image_url):
+def create_new_media(entry, title, description, image_url):
 
     media = Media(
         media_entry = entry,
@@ -92,7 +92,7 @@ def create_new_media(entry,title, description, image_url):
 
 def get_all_medias():
 
-    """Retrun all media"""
+    """Return all media"""
 
     return Media.query.all()
 

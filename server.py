@@ -1,11 +1,12 @@
 
-from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
+from flask import (Flask, render_template, request, flash, session, redirect, jsonify, url_for)
 from model import Entry, connect_to_db
 import crud
-from app_secrets import CLOUDINARY_KEY, CLOUDINARY_SECRET, WEATHER_KEY, GOOGLE_KEY
+from app_secrets import CLOUDINARY_KEY, CLOUDINARY_SECRET, CLOUD_NAME, WEATHER_KEY, GOOGLE_KEY
 import cloudinary.uploader
 import requests
 import json
+import os
 
 #to throw errors for jinja2 so we will see it instead of error being silent
 from jinja2 import StrictUndefined
@@ -89,12 +90,22 @@ def add_entry():
 
     title = request.form.get('title')
     description = request.form.get('description')
-    image_url = request.form.get('image_url')
-    entry_id = new_entry.entry_id
+    image_url = request.files.get('image_url')
+    
+    media_file = request.files['file_name']
 
-    new_media = crud.create_new_media(title,description,image_url,entry_id)
+    result = cloudinary.uploader.upload(media_file,
+                                        api_key=CLOUDINARY_KEY,
+                                        api_secret=CLOUDINARY_SECRET,
+                                        cloud_name=CLOUD_NAME)
+
+    img_url = result['secure_url']
+
+    new_media = crud.create_new_media(new_entry,title,description,image_url)
 
     return redirect('/view-entries')
+
+    
 
 @app.route('/geoapi/')
 def secure_geo_api_route():
@@ -112,17 +123,6 @@ def secure_geo_api_route():
     return jsonify(data)
     
 
-@app.route('/mediasapi', methods=["POST"])
-def secure_media_api_route():
-
-    media_file = request.files['my-file']
-
-    result = cloudinary.uploader.upload(media_file,
-                                        CLOUDINARY_KEY,
-                                        CLOUDINARY_SECRET,
-                                        cloud_name=zxiong)
-    img_url = result['secure_url']
-
 
 @app.route('/view-entries')
 def view_all_entries():
@@ -136,8 +136,17 @@ def view_all_entries():
 
     user_entries = crud.get_all_entries_by_user_id(user_id)
 
-    return render_template('all_entries.html', user_entries=user_entries)
+    medias = crud.get_all_medias()
 
+    return render_template('all_entries.html', user_entries=user_entries, medias=medias)
+
+
+@app.route('/search-associated-entries')
+def keyword_search():
+
+    #perform a query here where the keyword is entered and database finds
+    #matches that matches either one or multiple keywords
+    pass
 
 if __name__ == '__main__':
     connect_to_db(app)
