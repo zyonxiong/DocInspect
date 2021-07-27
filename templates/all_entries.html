@@ -6,17 +6,27 @@
 
 {% for entry in user_entries %}
 
-    <div>
-
+<div>
     Date: {{ entry.date_created }} <br>
-
+    
     <ul>
     Entry: {{ entry.entry_text }} <br>
     Weather: {{ entry.weather }}<br>
     Location: {{ entry.latitude }} , {{ entry. longitude }}<br>
-    <ul>
 
-    </div>
+    {% for media in entry.medias %}
+
+        Date: {{ entry.date_created }} <br>
+        
+            Image: <img src = '{{media.image_url}}'/><br>
+            Media Title: {{media.title}}<br>
+            Media Description: {{media.description}}<br>
+
+    {% endfor %}
+
+    </ul>
+
+</div>
 
 {% endfor %}
 

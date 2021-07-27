@@ -2,14 +2,19 @@
 
 {% block body %}
 
-    <h1>Welcome User!</h1>
+    <h1>DocInspect</h1>
   <body>
-    <!-- <form>
-      <label>Search <input type="text"></label><br>
-      <label>Date <input type="text" name='date'></label><br>
-    </form> -->
+    
+    <form id='search' action='/search-associated-entries'>
+      <div>
+        <label>Search</label>
+        <input type="text" id='search' name='search'>
+        <input type="submit" id='search-button' name='search-button'>
+      </div>
+    
+    </form>
 
-    <form action='/add-entry', method="POST">
+    <form action='/add-entry' method="POST" enctype="multipart/form-data">
       <div>
         <label>Date <input type="date" id='date' name='date'></label><br>
         <label>Add an Entry
@@ -18,21 +23,24 @@
         <label>Forecast</label>
           <input type='text' id='weather' name='weather'>
           <button id='location'>Location</button><br>
-          <label>Location:</label><input type='text' id='longitude' name='longitude'>
+          <label>Location:</label>
+          <input type='text' id='longitude' name='longitude'>
           <input type='text' id='latitude' name='latitude'><br>
         <label>IMG/Video Upload</label><br>
-          <input type='text' id='media' name='media'>
+          <input type="file" name="file_name"><br>
+          <label>Media Title</label>
+          <input type='text' name='title'><br>
+          <label>Media Description</label>
+          <input type='text' name='description'><br>
+          <input type="submit"><br>
       </div>
     </form>
 
-  <form id="media-submittal" action="/add entry" method="POST" enctype="multipart/form-data">
-      <input type="file" name="my-file"><br>
-      <label>Media Title</label><input type='text' id='title'><br>
-      <label>Media Description</label><input type='text' id='description'><br>
-      <label>Media URL</label><input type='image_url' id="image_url"><br>
-  </form>
+    <form action="/logout">
+      <h1>Log Out</h1>
+      <input type="submit">
+    </form>
 
-  <input type="submit">
     
     
 {% endblock %}
@@ -40,5 +48,8 @@
 {% block script%}
 
 <script src="/static/JS/geolocation_api.js"></script>
+<script src="/static/JS/cloudinary_api.js"></script>
+<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 
 {% endblock %}

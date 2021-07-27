@@ -1,8 +1,8 @@
 
-from flask import (Flask, render_template, request, flash, session, redirect, jsonify, url_for)
-from model import Entry, connect_to_db
+from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
+from model import Entry, Media, connect_to_db
 import crud
-from app_secrets import CLOUDINARY_KEY, CLOUDINARY_SECRET, CLOUD_NAME, WEATHER_KEY, GOOGLE_KEY
+from app_secrets import CLOUDINARY_KEY, CLOUDINARY_SECRET, CLOUD_NAME, WEATHER_KEY
 import cloudinary.uploader
 import requests
 import json
@@ -15,7 +15,6 @@ app = Flask(__name__)
 app.secret_key = 'secretmessage'
 
 #refer by variable for key name
-
 
 @app.route('/')
 def homepage():
@@ -73,6 +72,13 @@ def user_login():
 
     return render_template('User_Homepage.html')
 
+@app.route('/logout')
+def logout():
+
+    """Log out a user from DocInspect"""
+
+    return redirect('/')
+
 
 @app.route('/add-entry', methods=["GET","POST"])
 def add_entry():
@@ -90,7 +96,7 @@ def add_entry():
 
     title = request.form.get('title')
     description = request.form.get('description')
-    image_url = request.files.get('image_url')
+    img_url = request.files.get('image_url')
     
     media_file = request.files['file_name']
 
@@ -98,10 +104,13 @@ def add_entry():
                                         api_key=CLOUDINARY_KEY,
                                         api_secret=CLOUDINARY_SECRET,
                                         cloud_name=CLOUD_NAME)
+    print(dir(result))
+    print()
+    print(result)
+    img_url = result['url']
+    print(img_url)
 
-    img_url = result['secure_url']
-
-    new_media = crud.create_new_media(new_entry,title,description,image_url)
+    new_media = crud.create_new_media(new_entry,title,description,img_url)
 
     return redirect('/view-entries')
 
