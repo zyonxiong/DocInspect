@@ -42,14 +42,15 @@ def get_user_info(user_id):
 #maybe in the future will need some user information and create information here.
 #for now just create and make sure login information works
 
-def create_new_entry(user_id, entry_text, date_created, weather, 
-                    latitude, longitude):
+def create_new_entry(user_id, entry_text, date_created, weather_condition, 
+                    weather_temperature, latitude, longitude):
 
     entry = Entry(
         user_id=user_id,
         entry_text=entry_text,
         date_created=date_created,
-        weather=weather,
+        weather_condition=weather_condition,
+        weather_temperature=weather_temperature,
         latitude=latitude,
         longitude=longitude
     )

@@ -3,6 +3,7 @@
 {% block body %}
 
     <h1>DocInspect</h1>
+    <h3> User </h3>
   <body>
     
     <form id='search' action='/search-associated-entries'>
@@ -12,25 +13,37 @@
         <input type="submit" id='search-button' name='search-button'>
       </div>
     
+    <div class='container'>
+      <nav>
+        <ul>
+          <li><a href="#">Weather & Location</a></li>
+          <li><a href="#">Entry</a></li>
+          <li><a href="#">Media</a></li>
+        </ul>
+      </nav>
+
+  </div>
     </form>
 
     <form action='/add-entry' method="POST" enctype="multipart/form-data">
       <div>
         <label>Date <input type="date" id='date' name='date'></label><br>
-        <label>Add an Entry
+        <label>Add an Entry</label><br>
           <input type="textarea" id= 'entry' name='entry'><br>
-        </label>
-        <label>Forecast</label>
-          <input type='text' id='weather' name='weather'>
-          <button id='location'>Location</button><br>
-          <label>Location:</label>
+          <label>Location:</label><br>
           <input type='text' id='longitude' name='longitude'>
           <input type='text' id='latitude' name='latitude'><br>
+          <button id='location'>Location</button><br>
+          <label>Forecast</label><br>
+          <label>Weather Temperature (F)</label><br>
+          <input type='text' id='weather-temperature' name='weather-temperature'><br>
+          <label>Weather Condition</label><br>
+          <input type='text' id='weather-condition' name='weather-condition'><br>
         <label>IMG/Video Upload</label><br>
           <input type="file" name="file_name"><br>
-          <label>Media Title</label>
+          <label>Media Title</label><br>
           <input type='text' name='title'><br>
-          <label>Media Description</label>
+          <label>Media Description</label><br>
           <input type='text' name='description'><br>
           <input type="submit"><br>
       </div>

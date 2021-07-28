@@ -44,7 +44,10 @@ class Entry(db.Model):
     date_created = db.Column(db.DateTime,
                     nullable=True)
 
-    weather = db.Column(db.String(50),
+    weather_condition = db.Column(db.String(50),
+                        nullable=True)
+
+    weather_temperature = db.Column(db.String(50),
                         nullable=True)
 
     latitude = db.Column(db.String(50),

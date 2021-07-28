@@ -11,16 +11,14 @@
     
     <ul>
     Entry: {{ entry.entry_text }} <br>
-    Weather: {{ entry.weather }}<br>
+    Weather Temperature (Farenheit): {{ entry.weather_temperature }}<br>
+    Weather Condition: {{ entry.weather_condition }}<br>
     Location: {{ entry.latitude }} , {{ entry. longitude }}<br>
 
     {% for media in entry.medias %}
-
-        Date: {{ entry.date_created }} <br>
-        
-            Image: <img src = '{{media.image_url}}'/><br>
             Media Title: {{media.title}}<br>
             Media Description: {{media.description}}<br>
+            Image: <img src = '{{media.image_url}}'/><br>
 
     {% endfor %}
 

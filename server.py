@@ -1,6 +1,6 @@
 
 from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
-from model import Entry, Media, connect_to_db
+from model import Entry, Media, User, connect_to_db
 import crud
 from app_secrets import CLOUDINARY_KEY, CLOUDINARY_SECRET, CLOUD_NAME, WEATHER_KEY
 import cloudinary.uploader
@@ -76,7 +76,7 @@ def user_login():
 def logout():
 
     """Log out a user from DocInspect"""
-
+    #what is session.pop('username',none)
     return redirect('/')
 
 
@@ -86,13 +86,14 @@ def add_entry():
     user_id = session['user_id']
     entry_text = request.form.get('entry')
     date_created = request.form.get('date')
-    weather = request.form.get('weather')
+    weather_condition = request.form.get('weather-condition')
+    weather_temperature = request.form.get('weather-temperature')
     longitude = request.form.get('longitude') 
     latitude = request.form.get('latitude')
     
     new_entry = crud.create_new_entry(user_id, entry_text,
-                                   date_created, weather, 
-                                       latitude, longitude)
+                                   date_created, weather_condition,
+                                   weather_temperature, latitude, longitude)
 
     title = request.form.get('title')
     description = request.form.get('description')
@@ -104,11 +105,8 @@ def add_entry():
                                         api_key=CLOUDINARY_KEY,
                                         api_secret=CLOUDINARY_SECRET,
                                         cloud_name=CLOUD_NAME)
-    print(dir(result))
-    print()
-    print(result)
+
     img_url = result['url']
-    print(img_url)
 
     new_media = crud.create_new_media(new_entry,title,description,img_url)
 

@@ -1,9 +1,8 @@
 function successFunction(data)
     {
-      $('#weather').val(data.current.condition.text)
-      //$('#temperature').val(data.current.temp_f)
+      $('#weather-temperature').val(data.current.temp_f)
+      $('#weather-condition').val(data.current.condition.text)
       //$('#date').val(data.location.localtime)
-      // console.log(data.current.condition.text);
       $('#longitude').val(data.location.lon)
       $('#latitude').val(data.location.lat)
 
