@@ -13,7 +13,7 @@
     Entry: {{ entry.entry_text }} <br>
     Weather Temperature (Farenheit): {{ entry.weather_temperature }}<br>
     Weather Condition: {{ entry.weather_condition }}<br>
-    Location: {{ entry.latitude }} , {{ entry. longitude }}<br>
+    Location: {{ entry.latitude }} , {{ entry.longitude }}<br>
 
     {% for media in entry.medias %}
             Media Title: {{media.title}}<br>
@@ -28,5 +28,6 @@
 
 {% endfor %}
 
+<a href='/add-entry-form'> Add new Entry </a>
 
 {% endblock body %}

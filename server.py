@@ -28,9 +28,9 @@ def homepage():
 def list_of_users():
     """Gives a list of users."""
     
-    user = crud.get_all_usernames()
+    users = crud.get_all_usernames()
 
-    return render_template('/all_users.html', user=user)
+    return render_template('all_users.html', users=users)
 
 
 @app.route('/users', methods=['POST'])
@@ -50,33 +50,35 @@ def register_user():
 
     return redirect("/")
 
-@app.route('/login', methods=['POST'])
+@app.route('/login')
 def user_login():
 
     """Log a user into DocInspect."""
     
-    username = request.form.get('username')
-    password = request.form.get('password')
+    username = request.args.get('login-username')
+    password = request.args.get('login-password')
     
     user = crud.check_user_login_info(username, password)
     
-    if "user_id" not in session:
-        session["user_id"] = user.user_id
-    else:
-        active_user = session.get("user_id")
-        
     if user:
+        session["user_id"] = user.user_id
         flash(f"{user.username}, Successful login")
     else:
-        flash("Login info is incorrect, please try again")    
+        flash("Login info is incorrect, please try again or create a new account.")    
 
-    return render_template('User_Homepage.html')
+    print("**************")
+    print(session)
+
+    return render_template('User_Homepage.html', user=user)
 
 @app.route('/logout')
-def logout():
+def user_logout():
 
     """Log out a user from DocInspect"""
-    #what is session.pop('username',none)
+    print("Before clearing session", session)
+    session.clear()
+    flash('Logged out!')
+    print('After clearing session', session)
     return redirect('/')
 
 
@@ -113,6 +115,16 @@ def add_entry():
     return redirect('/view-entries')
 
     
+@app.route('/add-entry-form')
+def show_entry_form():
+
+    """Show the entry form from User Homepage"""
+
+    user_id = session.get('user_id')
+
+    user = crud.get_user_info(user_id)
+
+    return render_template('User_Homepage.html', user=user )
 
 @app.route('/geoapi/')
 def secure_geo_api_route():
@@ -141,11 +153,10 @@ def view_all_entries():
 
         return redirect('/')
 
+
     user_entries = crud.get_all_entries_by_user_id(user_id)
 
-    medias = crud.get_all_medias()
-
-    return render_template('all_entries.html', user_entries=user_entries, medias=medias)
+    return render_template('all_entries.html', user_entries=user_entries)
 
 
 @app.route('/search-associated-entries')
@@ -153,7 +164,24 @@ def keyword_search():
 
     #perform a query here where the keyword is entered and database finds
     #matches that matches either one or multiple keywords
-    pass
+    
+    return render_template('searching_for_keywords.html')
+
+
+@app.route('/show-keyword-result')
+def show_entries_with_keyword():
+
+    
+    user_id = session.get('user_id')
+
+    keyword = request.args.get('search')
+
+    user_entries = crud.find_keyword(keyword, user_id)
+
+    return render_template('all_entries.html', user_entries=user_entries)
+
+
+
 
 if __name__ == '__main__':
     connect_to_db(app)

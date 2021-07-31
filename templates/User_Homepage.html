@@ -3,15 +3,8 @@
 {% block body %}
 
     <h1>DocInspect</h1>
-    <h3> User </h3>
+    <h3> Username: {{ user.username }} </h3>
   <body>
-    
-    <form id='search' action='/search-associated-entries'>
-      <div>
-        <label>Search</label>
-        <input type="text" id='search' name='search'>
-        <input type="submit" id='search-button' name='search-button'>
-      </div>
     
     <div class='container'>
       <nav>
@@ -19,12 +12,15 @@
           <li><a href="#">Weather & Location</a></li>
           <li><a href="#">Entry</a></li>
           <li><a href="#">Media</a></li>
+          <li><a href='/search-associated-entries'>search me</a></li>
         </ul>
       </nav>
 
   </div>
     </form>
-
+  
+  {% if "user_id" in session %}
+   
     <form action='/add-entry' method="POST" enctype="multipart/form-data">
       <div>
         <label>Date <input type="date" id='date' name='date'></label><br>
@@ -54,6 +50,8 @@
       <input type="submit">
     </form>
 
+
+  {% endif %} 
     
     
 {% endblock %}
