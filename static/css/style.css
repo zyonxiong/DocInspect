@@ -1,0 +1,22 @@
+body {
+    background-color: silver;
+}
+
+#header-title {
+    color: black;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#user-form {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#create-account {
+    color: black;
+}
+
+#registation-box {
+    
+}
