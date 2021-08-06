@@ -39,8 +39,6 @@ def get_user_info(user_id):
 
     return User.query.get(user_id)
 
-#maybe in the future will need some user information and create information here.
-#for now just create and make sure login information works
 
 def create_new_entry(user_id, entry_text, date_created, weather_condition, 
                     weather_temperature, latitude, longitude):
@@ -63,15 +61,23 @@ def get_entry_by_id(entry_id):
     """Return entry by id"""
 
     return Entry.query.get(entry_id)
+
     
 def get_all_entries_by_user_id(user_id):
 
-    return Entry.query.filter_by(user_id = user_id).all()
+    return Entry.query.filter_by(user_id=user_id).all()
 
 
 def get_all_entries():
 
     """Return all the entries."""
+
+    return Entry.query.all()
+
+
+def get_all_entries_by_keyword():
+
+    """Return any associated entries with keyword(s)."""
 
     return Entry.query.all()
 
@@ -97,6 +103,13 @@ def get_all_medias():
 
     return Media.query.all()
 
+def find_keyword(keyword, user_id):
+
+    """Return search keyword associated in database."""
+
+    result = Entry.query.filter((Entry.entry_text.like('%' + keyword + '%')) & (Entry.user_id==user_id)).all()
+
+    return result
 
 
 if __name__ == '__main__':

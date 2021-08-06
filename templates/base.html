@@ -9,9 +9,8 @@
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 
-  
-
 </head>
+
 <body>
 
   {% with messages = get_flashed_messages() %}
@@ -19,6 +18,27 @@
     {{ messages }}
   {% endif %}
   {%endwith %}
+
+  {% block nav %}
+    <div class='container'>
+      <nav>
+        <ul>
+          <li><a href="#">Weather & Location</a></li>
+          <li><a href="#">Entry</a></li>
+          <li><a href="#">Media</a></li>
+          <li><a href='/search-associated-entries'>search me</a></li>
+        </ul>
+      </nav>
+    
+    </div>
+    
+    <div>
+        <form action="/logout">
+          <h1>Log Out</h1>
+          <input type="submit">
+        </form>
+    </div>
+    {% endblock %}
 
   {% block body %} {% endblock %}
 

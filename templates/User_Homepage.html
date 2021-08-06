@@ -5,20 +5,7 @@
     <h1>DocInspect</h1>
     <h3> Username: {{ user.username }} </h3>
   <body>
-    
-    <div class='container'>
-      <nav>
-        <ul>
-          <li><a href="#">Weather & Location</a></li>
-          <li><a href="#">Entry</a></li>
-          <li><a href="#">Media</a></li>
-          <li><a href='/search-associated-entries'>search me</a></li>
-        </ul>
-      </nav>
 
-  </div>
-    </form>
-  
   {% if "user_id" in session %}
    
     <form action='/add-entry' method="POST" enctype="multipart/form-data">
@@ -44,12 +31,7 @@
           <input type="submit"><br>
       </div>
     </form>
-
-    <form action="/logout">
-      <h1>Log Out</h1>
-      <input type="submit">
-    </form>
-
+  </body>
 
   {% endif %} 
     
