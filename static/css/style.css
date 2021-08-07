@@ -2,21 +2,31 @@ body {
     background-color: silver;
 }
 
+/* Style for Login_Page */
+
 #header-title {
     color: black;
     text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-top: 50px;
 }
 
 #user-form {
     text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    border: 5px solid gray;
+    border-radius: 5em;
+    margin: auto;
+    width: 40%;
 }
 
-#create-account {
-    color: black;
+#create-form {
+    margin-top: 20px;
 }
 
-#registation-box {
-    
+#created-form {
+    margin-top: 20px;
+
 }
+
+/* style for User_Homepage.html */
