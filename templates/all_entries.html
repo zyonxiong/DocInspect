@@ -18,7 +18,8 @@
     {% for media in entry.medias %}
             Media Title: {{media.title}}<br>
             Media Description: {{media.description}}<br>
-            Image: <img src = '{{media.image_url}}'/><br>
+            Image: <br>
+            <img src = '{{media.image_url}}' width="300" height="300"/><br>
 
     {% endfor %}
 
@@ -27,7 +28,5 @@
 </div>
 
 {% endfor %}
-
-<a href='/add-entry-form'> Add new Entry </a>
 
 {% endblock body %}

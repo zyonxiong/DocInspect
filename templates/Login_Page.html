@@ -2,28 +2,53 @@
 
 {% block nav %} {% endblock %}
 
+{% block logout %} {% endblock %}
+
 {% block body %} 
+
 
 <body>
 
       <h1 id="header-title">Welcome To DocInspect</h1>
+      <div class="bg"></div>
       <div class='register-box'>
         <div id="user-form">
           <h3>Don't have an account? Create A New Account Here!</h3>
             <form id="create-form" action="/users" method="POST">
-              <label>Username: <input type="text" name="username" placeholder="create username"></label><br>
-              <label>Password: <input type="text" name="password" placeholder="create password"></label><br>
-              <input type="submit" value="Create New Account">
+              <div class="row">
+              <div class="form-floating col-md-2">
+                <input type="text" class="form-control" id="floatingInput" name="username" placeholder="create username" required>
+                <label for="floatingInput">Username</label>
+              </div>
+              <div class="form-floating col-md-2">
+                <input type="password" class="form-control" id="floatingPassword" name="password" placeholder="create password" required>
+                <label for="floatingPassword">Password</label>
+              </div>
+              </div>
+              <!-- <label>Username: <input type="text" name="username" placeholder="create username" required></label><br>
+              <label>Password: <input type="text" name="password" placeholder="create password" required></label><br> -->
+              <br><input id="create-button" type="submit" value="Create New Account">
             </form>
           <h3>Log In</h3>
             <form id= "created-form" action="/login">
-                <label>Username:<input type="text" name="login-username" placeholder="username"></label><br>
-                <label>Password:<input type="text" name="login-password" placeholder="password"></label><br>
-                <input type="submit" value="Log In"><br>
+              <div class="row">
+              <div class="form-floating col-2">
+                <input type="text" class="form-control" id="floatingInput" name="login-username" placeholder="username" required>
+                <label for="floatingInput">Username</label>
+              </div>
+              <div class="form-floating col-md-2">
+                <input type="password" class="form-control" id="floatingPassword" name="login-password" placeholder="Password">
+                <label for="floatingPassword">Password</label>
+              </div>
+              </div>
+              </div>
+                <!-- <label>Username:<input type="text" name="login-username" placeholder="username" required></label><br>
+                <label>Password:<input type="password" name="login-password" placeholder="password" required></label><br> -->
+                <br><input id="login button" type="submit" value="Log In"><br>
             </form>
         </div>
     </div>
-    
+
 </body>
 
 {% endblock %}

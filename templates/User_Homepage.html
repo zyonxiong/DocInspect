@@ -2,13 +2,12 @@
 
 {% block body %}
 
-    <h1>DocInspect</h1>
     <h3> Username: {{ user.username }} </h3>
   <body>
 
   {% if "user_id" in session %}
    
-    <form action='/add-entry' method="POST" enctype="multipart/form-data">
+    <form id="data-form" action='/add-entry' method="POST" enctype="multipart/form-data">
       <div>
         <label>Date <input type="date" id='date' name='date'></label><br>
         <label>Add an Entry</label><br>
