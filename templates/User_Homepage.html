@@ -2,31 +2,78 @@
 
 {% block body %}
 
-    <h3> Username: {{ user.username }} </h3>
+    <h3> Username: {{ user.username }} </h3> <br>
   <body>
 
   {% if "user_id" in session %}
    
     <form id="data-form" action='/add-entry' method="POST" enctype="multipart/form-data">
       <div>
-        <label>Date <input type="date" id='date' name='date'></label><br>
-        <label>Add an Entry</label><br>
-          <input type="textarea" id= 'entry' name='entry'><br>
-          <label>Location:</label><br>
-          <input type='text' id='longitude' name='longitude'>
+        <h4>Date <input type="datetime-local" id='date' name='date'></h4><br>
+        <h4>Add an Entry</h4><br>
+          <!-- <textarea name="entry" id= 'entry' rows="5" cols="60"></textarea><br> -->
+          <div class="row">
+          <div class="form-floating col-2">
+            <textarea class="form-control" id='entry' name='entry' 
+            placeholder="Leave an entry here" id="floatingTextarea2" rows="5" cols="60"></textarea>
+            <label for="floatingTextarea2">Write an entry here...</label>
+          </div>
+          </div>
+          <br><h5>Location:</h5><br>
+
+          <div class="row">
+            <div class="form-floating col-2">
+              <input type="text" class="form-control" id="longitude" name="longitude" placeholder="longitude">
+              <label for="floatingInput">Longitude</label>
+            </div>
+            <div class="form-floating col-md-2">
+              <input type="text" class="form-control" id="latitude" name="latitude" placeholder="latitude">
+              <label for="floatingPassword">Latitude</label>
+            </div>
+          </div>
+
+          <br><h5>Weather:</h5><br>
+
+            <div class="row">
+              <div class="form-floating col-2">
+                <input type="text" class="form-control" id="weather-temperature" name="weather-temperature" placeholder="weather-temperature">
+                <label for="floatingInput">Weather Temperature (F)</label>
+              </div>
+              <div class="form-floating col-md-2">
+                <input type="text" class="form-control" id="weather-condition" name="weather-condition" placeholder="weather-condition">
+                <label for="floatingPassword">Weather Condition</label>
+              </div>
+            </div>
+
+          <!-- <input type='text' id='longitude' name='longitude'>
           <input type='text' id='latitude' name='latitude'><br>
-          <button id='location'>Location</button><br>
           <label>Forecast</label><br>
           <label>Weather Temperature (F)</label><br>
           <input type='text' id='weather-temperature' name='weather-temperature'><br>
           <label>Weather Condition</label><br>
-          <input type='text' id='weather-condition' name='weather-condition'><br>
-        <label>IMG/Video Upload</label><br>
-          <input type="file" name="file_name"><br>
-          <label>Media Title</label><br>
+          <input type='text' id='weather-condition' name='weather-condition'><br> -->
+          <br><button id='location'>Click for Location and Weather</button><br>
+          
+                      
+        <br><h5>Media Upload</h5><br>
+          <input type="file" name="file_name"><br><br>
+
+          <div class="row">
+            <div class="form-floating col-2">
+              <input type="text" class="form-control" id="media title" name="title" placeholder="media title">
+              <label for="floatingInput">Media Title</label>
+            </div>
+            <div class="form-floating col-md-2">
+              <input type="text" class="form-control" id="media description" name="description" placeholder="media description">
+              <label for="floatingPassword">Description</label>
+            </div>
+          </div>
+          <br>
+          
+          <!-- <label>Media Title</label><br>
           <input type='text' name='title'><br>
           <label>Media Description</label><br>
-          <input type='text' name='description'><br>
+          <input type='text' name='description'><br> -->
           <input type="submit"><br>
       </div>
     </form>

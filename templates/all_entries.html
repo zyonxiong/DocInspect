@@ -6,10 +6,12 @@
 
 {% for entry in user_entries %}
 
-<div>
+<div class="form-floating"></div>
+
     Date: {{ entry.date_created }} <br>
     
     <ul>
+    Entry ID: {{ entry.entry_id }} <br>
     Entry: {{ entry.entry_text }} <br>
     Weather Temperature (Farenheit): {{ entry.weather_temperature }}<br>
     Weather Condition: {{ entry.weather_condition }}<br>
@@ -22,6 +24,8 @@
             <img src = '{{media.image_url}}' width="300" height="300"/><br>
 
     {% endfor %}
+
+    <hr class="horizontal break" size="10" noshade color="maroon" width="100%" >
 
     </ul>
 
