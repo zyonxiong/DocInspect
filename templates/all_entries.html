@@ -6,30 +6,35 @@
 
 {% for entry in user_entries %}
 
-<div class="form-floating"></div>
+<div class="form-floating">
 
-    Date: {{ entry.date_created }} <br>
+    <!-- Date: {{ entry.date_created }} <br> -->
+    <div>
+        <div class="container">
     
-    <ul>
-    Entry ID: {{ entry.entry_id }} <br>
-    Entry: {{ entry.entry_text }} <br>
-    Weather Temperature (Farenheit): {{ entry.weather_temperature }}<br>
-    Weather Condition: {{ entry.weather_condition }}<br>
-    Location: {{ entry.latitude }} , {{ entry.longitude }}<br>
+            <ul>
+            Date: {{ entry.date_created }} <br>
+            Entry ID: {{ entry.entry_id }} <br>
+            Entry: {{ entry.entry_text }} <br>
+            Weather Temperature (Farenheit): {{ entry.weather_temperature }}<br>
+            Weather Condition: {{ entry.weather_condition }}<br>
+            Location: {{ entry.latitude }} , {{ entry.longitude }}<br>
+            
+            {% for media in entry.medias %}
+                    Media Title: {{media.title}}<br>
+                    Media Description: {{media.description}}<br>
+                    Image: <br><br>
+                    <img id="images" src = '{{media.image_url}}' width="340" height="340"/><br>
+            
 
-    {% for media in entry.medias %}
-            Media Title: {{media.title}}<br>
-            Media Description: {{media.description}}<br>
-            Image: <br>
-            <img src = '{{media.image_url}}' width="300" height="300"/><br>
-
-    {% endfor %}
-
-    <hr class="horizontal break" size="10" noshade color="maroon" width="100%" >
-
-    </ul>
-
+            {% endfor %}
+            <!-- <hr class="horizontal break" size="10" noshade color="maroon" width="100%" > -->
+            </ul>
+        </div>
+    </div>
 </div>
+
+    <br>
 
 {% endfor %}
 

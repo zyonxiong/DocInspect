@@ -9,13 +9,13 @@
    
     <form id="data-form" action='/add-entry' method="POST" enctype="multipart/form-data">
       <div>
-        <h4>Date <input type="datetime-local" id='date' name='date'></h4><br>
+        <h4>Date <input type="datetime-local" id='date' name='date' required></h4><br>
         <h4>Add an Entry</h4><br>
           <!-- <textarea name="entry" id= 'entry' rows="5" cols="60"></textarea><br> -->
           <div class="row">
           <div class="form-floating col-2">
             <textarea class="form-control" id='entry' name='entry' 
-            placeholder="Leave an entry here" id="floatingTextarea2" rows="5" cols="60"></textarea>
+            placeholder="Leave an entry here" id="floatingTextarea2" rows="5" cols="60" required></textarea>
             <label for="floatingTextarea2">Write an entry here...</label>
           </div>
           </div>
@@ -23,11 +23,11 @@
 
           <div class="row">
             <div class="form-floating col-2">
-              <input type="text" class="form-control" id="longitude" name="longitude" placeholder="longitude">
+              <input type="text" class="form-control" id="longitude" name="longitude" placeholder="longitude" required>
               <label for="floatingInput">Longitude</label>
             </div>
             <div class="form-floating col-md-2">
-              <input type="text" class="form-control" id="latitude" name="latitude" placeholder="latitude">
+              <input type="text" class="form-control" id="latitude" name="latitude" placeholder="latitude" required>
               <label for="floatingPassword">Latitude</label>
             </div>
           </div>
@@ -36,11 +36,11 @@
 
             <div class="row">
               <div class="form-floating col-2">
-                <input type="text" class="form-control" id="weather-temperature" name="weather-temperature" placeholder="weather-temperature">
+                <input type="text" class="form-control" id="weather-temperature" name="weather-temperature" placeholder="weather-temperature" required>
                 <label for="floatingInput">Weather Temperature (F)</label>
               </div>
               <div class="form-floating col-md-2">
-                <input type="text" class="form-control" id="weather-condition" name="weather-condition" placeholder="weather-condition">
+                <input type="text" class="form-control" id="weather-condition" name="weather-condition" placeholder="weather-condition" required>
                 <label for="floatingPassword">Weather Condition</label>
               </div>
             </div>
@@ -52,7 +52,7 @@
           <input type='text' id='weather-temperature' name='weather-temperature'><br>
           <label>Weather Condition</label><br>
           <input type='text' id='weather-condition' name='weather-condition'><br> -->
-          <br><button id='location'>Click for Location and Weather</button><br>
+          <br><button class="btn btn-primary" id='location'>Click for Location and Weather</button><br>
           
                       
         <br><h5>Media Upload</h5><br>
@@ -74,7 +74,7 @@
           <input type='text' name='title'><br>
           <label>Media Description</label><br>
           <input type='text' name='description'><br> -->
-          <input type="submit"><br>
+          <input class="btn btn-primary" type="submit"><br>
       </div>
     </form>
   </body>

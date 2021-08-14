@@ -62,7 +62,7 @@ def user_login():
     
     if user:
         session["user_id"] = user.user_id
-        flash(f"{user.username}, Successful login")
+        # flash(f"{user.username}, Successful login")
     else:
         flash("Login info is incorrect, please try again or create a new account.")    
 
@@ -77,7 +77,7 @@ def user_logout():
     """Log out a user from DocInspect"""
     print("Before clearing session", session)
     session.clear()
-    flash('Logged out!')
+    # flash('Logged out!')
     print('After clearing session', session)
     return redirect('/')
 

@@ -19,6 +19,7 @@ body {
 
 .navbar-light .navbar-brand {
     color:maroon;
+    
 }
 
 .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .show>.nav-link {
@@ -27,11 +28,18 @@ body {
 
 .navbar-light .navbar-nav .nav-link {
     color: maroon;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+
 }
 
 .btn-outline-success {
     color: maroon;
     border-color:maroon;
+}
+
+.offcanvas-body {
+    background-color: hsla(0, 1%, 54%, 0.37);
 }
 
 /* login page */
@@ -42,5 +50,29 @@ body {
 
 /* User_Homepage page */
 
+.btn btn-primary {
+
+    margin-top: auto;
+}
+
 /* all entries page */
+
+.container {
+
+    background-color: hsla(0, 1%, 54%, 0.37);
+    height: 600px;
+    width: 500px;
+    text-align: left;
+    border-style: solid;
+    border-width: solid;
+    border-top: solid;
+    
+}
+
+#images {
+    display: block;
+    border: 3px solid;
+    margin-left: auto;
+    margin-right: auto;
+}
 

@@ -24,11 +24,11 @@
 
 <body>
 
-  <!-- {% with messages = get_flashed_messages() %}
+  {% with messages = get_flashed_messages() %}
   {% if messages %}
     {{ messages }}
   {% endif %}
-  {%endwith %} -->
+  {%endwith %}
 
   {% block nav %}
 
@@ -58,7 +58,7 @@
           </div>
           <div class="logout">
             <form id='logout button' action="/logout">
-              <input type="submit" value="Log Out">
+              <input class="btn btn-primary" type="submit" value="Log Out">
             </form>
           </div>
         </div>
