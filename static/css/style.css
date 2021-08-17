@@ -55,6 +55,9 @@ body {
     margin-top: auto;
 }
 
+.offcanvas-title {
+    font-weight: bold;
+}
 /* all entries page */
 
 .container {
